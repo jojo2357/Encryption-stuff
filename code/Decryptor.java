@@ -21,7 +21,7 @@ class Decryptor{
 		}
 		reader.close();
 		String paragraph = new String(arrey);//start.toString().toLowerCase();
-		paragraph = paragraph.toLowerCase();
+		paragraph = paragraph.toLowerCase().trim();
 		arrey = null;
 		System.gc();
 		System.out.println(paragraph.length());
@@ -56,6 +56,8 @@ class Decryptor{
 					replaces++;
 				}
 		}
+		System.out.println(paragraph);
+		System.out.println(out);
 		String words[] = out.toString().split(" ");
 		int lastCharFreqs[] = new int[26];
 		countItUp(lastCharFreqs, "(T.E)", words, 3);
@@ -116,6 +118,7 @@ class Decryptor{
 			String recordWord = "";
 			words = out.toString().split(" ");
 			ArrayList<String> unsolvedWords = new ArrayList<String>();
+			System.out.println(out);
 			for (String word : words){
 				int wrongs = 0;
 
@@ -150,6 +153,8 @@ class Decryptor{
 						if ((unsolvedWords.get(printdex).charAt(charFindr) <= 'z' && unsolvedWords.get(printdex).charAt(charFindr) >= 'a'))
 							repChar = unsolvedWords.get(printdex).charAt(charFindr);
 					}
+					if (repChar == ' ')
+						throw new RuntimeException("Shrug");
 					for (int dex = 0; dex < paragraph.length(); dex++)
 						if (paragraph.charAt(dex) == (char)(repChar)){
 							out.setCharAt(dex, Character.toUpperCase(charIn));
@@ -180,6 +185,7 @@ class Decryptor{
 
 	private static void countItUp(int[] vals, String regex, String[] words, int wordLength){
 		for (String word : words){
+		System.out.println(word);
 		if (word.length() != wordLength)
 			continue;
 		Pattern pattern = Pattern.compile(regex);
@@ -214,6 +220,8 @@ class Decryptor{
 				rec = vals[maxFindr - 'a'];
 				recChar = maxFindr;
 			}
+		if (recChar == ' ') 
+			throw new RuntimeException();
 		return recChar;
 	}
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 class FrequencyCounter{
 	public static void main(String args[]) throws IOException{
 		int freqs[] = new int[26];
-		File inFile = new File("cipherCreated.txt");
+		File inFile = new File("startedWith.txt");
 		Scanner reader = new Scanner(inFile);
 		String paragraph = "";
 		while (reader.hasNextLine()){
